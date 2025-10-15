@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:markatty/Core/Helpers/spacing.dart';
+import 'package:markatty/Core/Theme/app_colors.dart';
+import 'package:markatty/Core/Theme/app_text_styles.dart';
 
 class LocationSelector extends StatelessWidget {
   const LocationSelector({super.key});
@@ -9,24 +12,51 @@ class LocationSelector extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey.shade300),
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(25),
       ),
       child: Row(
         children: [
-          const Icon(Icons.location_on_outlined, color: Colors.blue),
-          const SizedBox(width: 8),
-          const Expanded(
-            child: Text("Send To Brisbane, Queensland"),
+          Container(
+            height: 40,
+            width: 40,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: Colors.grey.shade300),
+            ),
+            child: Center(
+              child: Icon(Icons.location_on_outlined, color: AppColors.primary),
+            ),
+          ),
+          horizontalSpace(8),
+
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Send To",
+                  style: TextStyle(color: Colors.grey, fontSize: 12),
+                ),
+                Text(
+                  "Brisbane, Queensland",
+                  style: AppTextStyles.poppins14Regular(),
+                ),
+              ],
+            ),
           ),
           ElevatedButton(
             onPressed: () {},
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blue,
+              backgroundColor: AppColors.primary,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
+                borderRadius: BorderRadius.circular(20),
+              ),
             ),
-            child: const Text("Change"),
-          )
+            child: Text(
+              "Change",
+              style: AppTextStyles.poppins14Bold(color: Colors.white),
+            ),
+          ),
         ],
       ),
     );

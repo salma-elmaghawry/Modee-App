@@ -4,6 +4,7 @@ import 'package:markatty/Features/Home/presentation/Widgets/brand_section.dart';
 import 'package:markatty/Features/Home/presentation/Widgets/flash_sale_section.dart';
 import 'package:markatty/Features/Home/presentation/Widgets/location_selector.dart';
 import 'package:markatty/Features/Home/presentation/Widgets/offer_banner.dart';
+import 'package:markatty/Core/Helpers/spacing.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -30,16 +31,17 @@ class HomeScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              AppHeader(),
-              SizedBox(height: 12),
-              LocationSelector(),
-              SizedBox(height: 16),
-              OfferBanner(),
-              SizedBox(height: 20),
-              BrandSection(),
-              SizedBox(height: 20),
-              FlashSaleSection(),
+            children: [
+              verticalSpace(15),
+              const AppHeader(),
+              verticalSpace(20),
+              const LocationSelector(),
+              verticalSpace(20),
+              const OfferBanner(),
+              verticalSpace(20),
+              const BrandSection(),
+              verticalSpace(20),
+              const FlashSaleSection(),
             ],
           ),
         ),
