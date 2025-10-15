@@ -8,24 +8,18 @@ class OfferBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    return SizedBox(
       height: 180,
       width: double.infinity,
-      margin: const EdgeInsets.symmetric(horizontal: 16),
       child: Stack(
+        clipBehavior: Clip.none,
         children: [
-          // === Background image ===
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: Image.asset(
-              AppImages.model,
-              height: double.infinity,
-              fit: BoxFit.cover,
-            ),
-          ),
-
-          // === Gradient overlay ===
+          // base rounded gradient container
           Container(
+            height: 180,
+            width: double.infinity,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               gradient: LinearGradient(
@@ -34,14 +28,11 @@ class OfferBanner extends StatelessWidget {
                 colors: [AppColors.primary, AppColors.lightGrey],
               ),
             ),
-          ),
-
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 18),
             child: Align(
-              alignment: Alignment.bottomLeft,
+              alignment: Alignment.centerLeft,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
@@ -51,14 +42,14 @@ class OfferBanner extends StatelessWidget {
                       fontSize: 20,
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  const SizedBox(height: 6),
                   Text(
                     "Limited time picks \njust for you",
                     style: AppTextStyles.poppins14Regular(
                       color: Colors.white70,
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 12),
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
@@ -71,14 +62,22 @@ class OfferBanner extends StatelessWidget {
                       shape: const StadiumBorder(),
                       elevation: 0,
                     ),
-                    child: const Text(
+                    child: Text(
                       "Shop Now",
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: AppTextStyles.poppins14Bold(),
                     ),
                   ),
                 ],
               ),
             ),
+          ),
+
+          // positioned image above/to the right of the container
+          Positioned(
+            right: 1,
+            top: -35,
+            bottom: -40,
+            child: Image.asset(AppImages.model, width: 230, height: 200),
           ),
         ],
       ),
