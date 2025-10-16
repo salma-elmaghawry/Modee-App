@@ -2,26 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:markatty/Core/Theme/app_colors.dart';
 import 'package:markatty/Core/Theme/app_text_styles.dart';
+import 'package:markatty/Core/di/dependency_injection.dart';
 import 'package:markatty/Features/Home/presentation/Widgets/product_card.dart';
+import 'package:markatty/Features/Home/presentation/Widgets/shimmer_grid.dart';
 // import 'package:markatty/Features/Home/presentation/Widgets/product_model.dart';
 import '../../data/repositories/product_repository.dart';
 import '../Manager/products_cubit/products_cubit.dart';
 import '../Manager/products_cubit/products_state.dart';
-import 'package:dio/dio.dart';
-import 'package:markatty/Core/Networking/api_service.dart';
 
 class FlashSaleSection extends StatelessWidget {
   const FlashSaleSection({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final dio = Dio();
-    final apiService = ApiService(dio);
-
     return BlocProvider<ProductsCubit>(
       create: (_) =>
-          ProductsCubit(repository: ProductRepository(apiService))
+          ProductsCubit(repository: getIt<ProductRepository>())
             ..fetchProducts(),
+
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -64,14 +62,11 @@ class FlashSaleSection extends StatelessWidget {
           BlocBuilder<ProductsCubit, ProductsState>(
             builder: (context, state) {
               if (state is ProductsLoading) {
-                return const Center(child: CircularProgressIndicator());
+                return const ShimmerGrid(count: 4);
               } else if (state is ProductsError) {
                 return Center(child: Text(state.message));
               } else if (state is ProductsLoaded) {
-                final apiProducts = state.products;
-                final products = apiProducts
-                    .map((e) => e.toProductModel())
-                    .toList();
+                final products = state.products;
                 return GridView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),

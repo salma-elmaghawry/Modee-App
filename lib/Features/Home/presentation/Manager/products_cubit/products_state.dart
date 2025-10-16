@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import '../../../data/models/product_model.dart';
+import '../../Widgets/product_model.dart';
 
 abstract class ProductsState extends Equatable {
   const ProductsState();
@@ -13,7 +13,7 @@ class ProductsInitial extends ProductsState {}
 class ProductsLoading extends ProductsState {}
 
 class ProductsLoaded extends ProductsState {
-  final List<ProductModel> products;
+  final List<ProductModelUi> products;
   const ProductsLoaded(this.products);
 
   @override

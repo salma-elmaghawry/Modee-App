@@ -1,6 +1,7 @@
+import 'package:equatable/equatable.dart';
 import 'package:markatty/Features/Home/data/models/category_model.dart';
 
-abstract class CategoryState {
+abstract class CategoryState extends Equatable {
   const CategoryState();
 
   @override
