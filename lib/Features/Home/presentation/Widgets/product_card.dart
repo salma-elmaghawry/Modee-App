@@ -5,7 +5,7 @@ import 'package:markatty/Core/Theme/app_text_styles.dart';
 import 'package:markatty/Features/Home/presentation/Widgets/product_model.dart';
 
 class ProductCard extends StatelessWidget {
-  final ProductModel product;
+  final ProductModelUi product;
   const ProductCard({super.key, required this.product});
 
   String _truncateWords(String text, int wordLimit) {
@@ -35,12 +35,25 @@ class ProductCard extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-            child: Image.asset(
-              AppImages.product,
-              height: 140,
-              width: double.infinity,
-              fit: BoxFit.cover,
-            ),
+            child: (product.image.startsWith('http'))
+                ? Image.network(
+                    product.image,
+                    height: 140,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) => Image.asset(
+                      AppImages.product,
+                      height: 140,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
+                  )
+                : Image.asset(
+                    AppImages.product,
+                    height: 140,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),

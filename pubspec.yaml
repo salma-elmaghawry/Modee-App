@@ -38,9 +38,9 @@ dependencies:
   google_fonts: ^4.0.4
   http: ^1.0.0
   pretty_dio_logger: ^1.4.0
+  equatable: ^2.0.7
 
 dev_dependencies:
-  equatable: ^2.0.7
   flutter_lints: ^5.0.0
   flutter_test:
     sdk: flutter

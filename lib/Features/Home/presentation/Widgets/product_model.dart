@@ -1,10 +1,10 @@
-class ProductModel {
+class ProductModelUi {
   final String name;
   final double price;
   final double rating;
   final String image;
 
-  ProductModel({
+  ProductModelUi({
     required this.name,
     required this.price,
     required this.rating,
