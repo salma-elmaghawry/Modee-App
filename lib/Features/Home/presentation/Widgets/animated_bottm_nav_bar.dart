@@ -40,7 +40,7 @@ class AnimatedBottomNavBar extends StatelessWidget {
               icon: Icons.favorite_border,
               label: 'Favourites',
               isActive: currentIndex == 2,
-              onTap: () => onTap(2),
+              onTap: () => Navigator.pushNamed(context, Routes.fav),
             ),
             BottomNavItem(
               icon: Icons.shopping_cart_outlined,
