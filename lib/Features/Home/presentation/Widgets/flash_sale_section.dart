@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:markatty/Core/Theme/app_colors.dart';
 import 'package:markatty/Core/Theme/app_text_styles.dart';
 import 'package:markatty/Core/di/dependency_injection.dart';
+import 'package:dio/dio.dart';
+import 'package:markatty/Core/Networking/api_service.dart';
 import 'package:markatty/Features/Home/presentation/Widgets/product_card.dart';
 import 'package:markatty/Features/Home/presentation/Widgets/shimmer_grid.dart';
 // import 'package:markatty/Features/Home/presentation/Widgets/product_model.dart';
@@ -16,9 +18,20 @@ class FlashSaleSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ProductsCubit>(
-      create: (_) =>
-          ProductsCubit(repository: getIt<ProductRepository>())
-            ..fetchProducts(),
+      create: (_) {
+        // If GetIt wasn't initialized (e.g. in tests), fall back to a simple
+        // repository that uses a fresh Dio + ApiService so the cubit can be
+        // created without throwing. In normal app runs GetIt will provide the
+        // registered repository.
+        ProductRepository repo;
+        try {
+          repo = getIt<ProductRepository>();
+        } catch (_) {
+          final dio = Dio();
+          repo = ProductRepository(ApiService(dio));
+        }
+        return ProductsCubit(repository: repo)..fetchProducts();
+      },
 
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

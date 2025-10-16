@@ -10,9 +10,13 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:markatty/main.dart';
 import 'package:markatty/modee_app.dart';
+import 'package:markatty/Core/di/dependency_injection.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+    // Initialize DI (same as main) so widgets depending on GetIt won't throw
+    await setupGetIt();
+
     // Build our app and trigger a frame.
     await tester.pumpWidget(const ModeeApp());
 
