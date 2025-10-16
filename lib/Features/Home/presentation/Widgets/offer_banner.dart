@@ -16,7 +16,6 @@ class OfferBanner extends StatelessWidget {
       child: Stack(
         clipBehavior: Clip.none,
         children: [
-          // base rounded gradient container
           Container(
             height: 180,
             width: double.infinity,
@@ -72,7 +71,6 @@ class OfferBanner extends StatelessWidget {
             ),
           ),
 
-          // positioned image above/to the right of the container
           Positioned(
             right: 1,
             top: -35,

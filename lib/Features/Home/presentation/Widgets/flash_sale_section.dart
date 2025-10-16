@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:markatty/Core/Theme/app_colors.dart';
+import 'package:markatty/Core/Theme/app_text_styles.dart';
 import 'package:markatty/Features/Home/presentation/Widgets/product_card.dart';
 import 'package:markatty/Features/Home/presentation/Widgets/product_model.dart';
 import 'product_card.dart';
@@ -21,6 +23,12 @@ class FlashSaleSection extends StatelessWidget {
         rating: 4.8,
         image: "assets/tshirt.png",
       ),
+      ProductModel(
+        name: "Puff Sleeved Blouse",
+        price: 16.99,
+        rating: 4.9,
+        image: "assets/blouse.png",
+      ),
     ];
 
     return Column(
@@ -28,27 +36,52 @@ class FlashSaleSection extends StatelessWidget {
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: const [
+          children: [
             Text(
               "Flash Sale",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              style: AppTextStyles.poppins14Bold(fontSize: 20),
             ),
-            Text(
-              "Ends at 1:24:02",
-              style: TextStyle(color: Colors.redAccent),
+            Row(
+              children: [
+                Text(
+                  "Ends at ",
+                  style: AppTextStyles.poppins14Regular(color: AppColors.grey),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
+                  ),
+                  decoration: BoxDecoration(
+                    color: AppColors.red,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    "1 : 24 : 02",
+                    style: AppTextStyles.poppins14Regular(
+                      color: AppColors.white,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
         const SizedBox(height: 12),
-        SizedBox(
-          height: 230,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: products.length,
-            itemBuilder: (context, index) =>
-                ProductCard(product: products[index]),
+        GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          padding: EdgeInsets.zero,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 12,
+            mainAxisSpacing: 12,
+            childAspectRatio: 160 / 230,
           ),
-        )
+          itemCount: products.length,
+          itemBuilder: (context, index) =>
+              ProductCard(product: products[index]),
+        ),
       ],
     );
   }

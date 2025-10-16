@@ -7,6 +7,10 @@ class AppImages {
   static const String search = 'assets/icons/search.png';
   static const String shopping = 'assets/icons/shopping.png';
 
-//images
-static const String model = "assets/images/model.png";
+  //images
+  static const String model = "assets/images/model.png";
+  static const String hm = "assets/images/hm-logo.png";
+  static const String product = "assets/images/product.png";
+
+  
 }
