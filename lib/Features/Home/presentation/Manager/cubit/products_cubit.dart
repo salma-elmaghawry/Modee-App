@@ -16,6 +16,7 @@ class ProductsCubit extends Cubit<ProductsState> {
       final products = apiProducts
           .map(
             (p) => ProductModelUi(
+              category: p.category,
               name: p.title,
               price: p.price,
               rating: p.rating,

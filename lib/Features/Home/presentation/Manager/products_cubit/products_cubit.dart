@@ -19,7 +19,15 @@ class ProductsCubit extends Cubit<ProductsState> {
       final products = apiProducts.map((p) => p.toProductModel()).toList();
       emit(ProductsLoaded(products));
     } catch (e) {
-      emit(ProductsError(e.toString()));
+      String message = 'Failed to load products';
+      if (e is ApiException) {
+        message = e.message;
+      } else if (e is DioException) {
+        message = e.message ?? message;
+      } else {
+        message = e.toString();
+      }
+      emit(ProductsError(message));
     }
   }
 }

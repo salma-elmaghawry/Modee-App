@@ -73,6 +73,40 @@ class FlashSaleSection extends StatelessWidget {
               if (state is ProductsLoading) {
                 return const ShimmerGrid(count: 4);
               } else if (state is ProductsError) {
+                final msg = state.message.toLowerCase();
+                final isNoInternet =
+                    msg.contains('no internet') || msg.contains('network');
+                if (isNoInternet) {
+                
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 12.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'The connection errored:',
+                          style: AppTextStyles.poppins14Bold(),
+                        ),
+                        const SizedBox(height: 8),
+                        Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: AppColors.grey.withOpacity(0.06),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Text(
+                            state.message,
+                            style: AppTextStyles.poppins14Regular(
+                              color: AppColors.grey,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+
                 return Center(child: Text(state.message));
               } else if (state is ProductsLoaded) {
                 final products = state.products;

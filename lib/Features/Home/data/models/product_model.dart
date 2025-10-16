@@ -55,6 +55,7 @@ class ProductModel {
       price: price,
       rating: rating,
       image: image,
+      category: category,
     );
   }
 }

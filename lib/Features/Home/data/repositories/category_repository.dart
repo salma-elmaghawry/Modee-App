@@ -8,13 +8,19 @@ class CategoryRepository {
   CategoryRepository(this.apiService);
 
   Future<List<CategoryModel>> fetchCategories() async {
-    final response = await apiService.get(ApiConstants.categoriesEndpoint);
+    try {
+      final response = await apiService.get(ApiConstants.categoriesEndpoint);
 
-    if (response.statusCode == 200) {
-      final List<dynamic> data = response.data;
-      return data.map((json) => CategoryModel.fromJson(json)).toList();
-    } else {
-      throw Exception('Failed to load categories');
+      if (response.statusCode == 200) {
+        final List<dynamic> data = response.data;
+        return data.map((json) => CategoryModel.fromJson(json)).toList();
+      } else {
+        throw Exception(
+          'Failed to load categories (status: ${response.statusCode})',
+        );
+      }
+    } catch (e) {
+      rethrow;
     }
   }
 }

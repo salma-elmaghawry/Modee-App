@@ -8,9 +8,6 @@ class CartCubit extends Cubit<CartState> {
   final List<CartEntry> _items = [];
 
   void addToCart(ProductModelUi product) {
-    // debug
-    // ignore: avoid_print
-    print('CartCubit.addToCart: ${product.name} - ${product.price}');
     final index = _items.indexWhere(
       (element) =>
           element.product.name == product.name &&
@@ -24,9 +21,7 @@ class CartCubit extends Cubit<CartState> {
     }
     final List<CartEntry> updated = List<CartEntry>.from(_items);
     emit(CartUpdated(updated));
-    // debug
-    // ignore: avoid_print
-    print('CartCubit.emit CartUpdated: items=${updated.length}');
+
   }
 
   void removeFromCart(ProductModelUi product) {
@@ -37,8 +32,6 @@ class CartCubit extends Cubit<CartState> {
     );
     final List<CartEntry> updated = List<CartEntry>.from(_items);
     emit(CartUpdated(updated));
-    // ignore: avoid_print
-    print('CartCubit.removeFromCart: ${product.name}, items=${updated.length}');
   }
 
   void changeQuantity(ProductModelUi product, int quantity) {
@@ -55,8 +48,6 @@ class CartCubit extends Cubit<CartState> {
       }
       final List<CartEntry> updated = List<CartEntry>.from(_items);
       emit(CartUpdated(updated));
-      // ignore: avoid_print
-      print('CartCubit.changeQuantity: ${product.name} -> $quantity');
     }
   }
 
