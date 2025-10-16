@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:markatty/Core/Theme/app_images.dart';
+import 'package:markatty/Core/Theme/app_text_styles.dart';
 
 class BrandSection extends StatelessWidget {
   const BrandSection({super.key});
@@ -6,20 +8,17 @@ class BrandSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final brands = [
-      {'name': 'H&M', 'image': 'assets/hm.png'},
-      {'name': 'Zara', 'image': 'assets/zara.png'},
-      {'name': 'Lacoste', 'image': 'assets/lacoste.png'},
-      {'name': 'Ralph L', 'image': 'assets/ralph.png'},
-      {'name': 'Pull & B', 'image': 'assets/pull.png'},
+      {'name': 'H&M', 'image': AppImages.hm},
+      {'name': 'Zara', 'image': AppImages.hm},
+      {'name': 'Lacoste', 'image': AppImages.hm},
+      {'name': 'Ralph L', 'image': AppImages.hm},
+      {'name': 'Pull & B', 'image': AppImages.hm},
     ];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          "Popular Brand",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-        ),
+        Text("Popular Brand", style: AppTextStyles.poppins14Bold(fontSize: 20)),
         const SizedBox(height: 10),
         SizedBox(
           height: 90,
@@ -40,9 +39,9 @@ class BrandSection extends StatelessWidget {
                     const SizedBox(height: 4),
                     Text(
                       brands[index]['name']!,
-                      style: const TextStyle(fontSize: 12),
+                      style: AppTextStyles.poppins14Regular(),
                       overflow: TextOverflow.ellipsis,
-                    )
+                    ),
                   ],
                 ),
               );

@@ -1,58 +1,83 @@
 import 'package:flutter/material.dart';
+import 'package:markatty/Core/Theme/app_colors.dart';
+import 'package:markatty/Core/Theme/app_images.dart';
+import 'package:markatty/Core/Theme/app_text_styles.dart';
 
 class OfferBanner extends StatelessWidget {
   const OfferBanner({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 140,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        image: const DecorationImage(
-          image: AssetImage("assets/banner.jpg"),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.black.withOpacity(0.35),
-          borderRadius: BorderRadius.circular(16),
-        ),
-        padding: const EdgeInsets.all(16),
-        child: const Align(
-          alignment: Alignment.centerLeft,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "50% Off Today",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18),
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    return SizedBox(
+      height: 180,
+      width: double.infinity,
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Container(
+            height: 180,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [AppColors.primary, AppColors.lightGrey],
               ),
-              SizedBox(height: 6),
-              Text(
-                "Limited-time picks just for you",
-                style: TextStyle(color: Colors.white70),
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 18),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "50 % off today",
+                    style: AppTextStyles.poppins14Bold(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    "Limited time picks \njust for you",
+                    style: AppTextStyles.poppins14Regular(
+                      color: Colors.white70,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      foregroundColor: Colors.black,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 22,
+                        vertical: 10,
+                      ),
+                      shape: const StadiumBorder(),
+                      elevation: 0,
+                    ),
+                    child: Text(
+                      "Shop Now",
+                      style: AppTextStyles.poppins14Bold(),
+                    ),
+                  ),
+                ],
               ),
-              SizedBox(height: 8),
-              ElevatedButton(
-                onPressed: null,
-                style: ButtonStyle(
-                  backgroundColor:
-                      WidgetStatePropertyAll<Color>(Colors.white),
-                ),
-                child: Text(
-                  "Shop Now",
-                  style: TextStyle(color: Colors.black),
-                ),
-              ),
-            ],
+            ),
           ),
-        ),
+
+          Positioned(
+            right: 1,
+            top: -35,
+            bottom: -40,
+            child: Image.asset(AppImages.model, width: 230, height: 200),
+          ),
+        ],
       ),
     );
   }
