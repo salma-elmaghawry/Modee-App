@@ -19,10 +19,6 @@ class FlashSaleSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<ProductsCubit>(
       create: (_) {
-        // If GetIt wasn't initialized (e.g. in tests), fall back to a simple
-        // repository that uses a fresh Dio + ApiService so the cubit can be
-        // created without throwing. In normal app runs GetIt will provide the
-        // registered repository.
         ProductRepository repo;
         try {
           repo = getIt<ProductRepository>();

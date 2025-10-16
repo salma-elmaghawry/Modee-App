@@ -8,6 +8,9 @@ class CartCubit extends Cubit<CartState> {
   final List<CartEntry> _items = [];
 
   void addToCart(ProductModelUi product) {
+    // debug
+    // ignore: avoid_print
+    print('CartCubit.addToCart: ${product.name} - ${product.price}');
     final index = _items.indexWhere(
       (element) =>
           element.product.name == product.name &&
@@ -19,7 +22,11 @@ class CartCubit extends Cubit<CartState> {
     } else {
       _items.add(CartEntry(product: product, quantity: 1));
     }
-    emit(CartUpdated(List.from(_items)));
+    final List<CartEntry> updated = List<CartEntry>.from(_items);
+    emit(CartUpdated(updated));
+    // debug
+    // ignore: avoid_print
+    print('CartCubit.emit CartUpdated: items=${updated.length}');
   }
 
   void removeFromCart(ProductModelUi product) {
@@ -28,7 +35,10 @@ class CartCubit extends Cubit<CartState> {
           element.product.name == product.name &&
           element.product.price == product.price,
     );
-    emit(CartUpdated(List.from(_items)));
+    final List<CartEntry> updated = List<CartEntry>.from(_items);
+    emit(CartUpdated(updated));
+    // ignore: avoid_print
+    print('CartCubit.removeFromCart: ${product.name}, items=${updated.length}');
   }
 
   void changeQuantity(ProductModelUi product, int quantity) {
@@ -43,12 +53,15 @@ class CartCubit extends Cubit<CartState> {
       } else {
         _items[index] = _items[index].copyWith(quantity: quantity);
       }
-      emit(CartUpdated(List.from(_items)));
+      final List<CartEntry> updated = List<CartEntry>.from(_items);
+      emit(CartUpdated(updated));
+      // ignore: avoid_print
+      print('CartCubit.changeQuantity: ${product.name} -> $quantity');
     }
   }
 
   void clearCart() {
     _items.clear();
-    emit(CartUpdated(List.from(_items)));
+    emit(CartUpdated(List<CartEntry>.from(_items)));
   }
 }

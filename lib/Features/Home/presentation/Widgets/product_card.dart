@@ -114,7 +114,13 @@ class ProductCard extends StatelessWidget {
                           final cubit = context.read<CartCubit>();
                           cubit.addToCart(product);
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Added to cart')),
+                            SnackBar(
+                              backgroundColor: AppColors.primary,
+                              content: Text(
+                                'Added to cart',
+                                style: AppTextStyles.poppins14Regular(),
+                              ),
+                            ),
                           );
                         } catch (e) {
                           // If CartCubit isn't provided higher up, ignore silently

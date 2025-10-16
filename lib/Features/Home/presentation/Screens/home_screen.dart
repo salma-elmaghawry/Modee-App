@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:markatty/Features/Home/presentation/Widgets/animated_bottm_nav_bar.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:markatty/Features/Cart/presentation/Manager/cart_cubit.dart';
 import 'package:markatty/Features/Home/presentation/Widgets/app_header.dart';
 import 'package:markatty/Features/Home/presentation/Widgets/brand_section.dart';
 import 'package:markatty/Features/Home/presentation/Widgets/flash_sale_section.dart';
@@ -28,31 +26,28 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => CartCubit(),
-      child: Scaffold(
-        body: PageView(
-          controller: _pageController,
-          onPageChanged: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
-          children: const [_HomeContent()],
-        ),
-        bottomNavigationBar: AnimatedBottomNavBar(
-          currentIndex: _currentIndex,
-          onTap: (index) {
-            setState(() {
-              _currentIndex = index;
-              _pageController.animateToPage(
-                index,
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.easeInOut,
-              );
-            });
-          },
-        ),
+    return Scaffold(
+      body: PageView(
+        controller: _pageController,
+        onPageChanged: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        children: const [_HomeContent()],
+      ),
+      bottomNavigationBar: AnimatedBottomNavBar(
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+            _pageController.animateToPage(
+              index,
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+            );
+          });
+        },
       ),
     );
   }
