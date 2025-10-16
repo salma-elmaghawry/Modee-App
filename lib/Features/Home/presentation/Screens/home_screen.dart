@@ -34,11 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
             _currentIndex = index;
           });
         },
-        children: const [
-          _HomeContent(),
-          PlaceholderWidget(icon: Icons.favorite, title: 'Wishlist'),
-          PlaceholderWidget(icon: Icons.person, title: 'Profile'),
-        ],
+        children: const [_HomeContent()],
       ),
       bottomNavigationBar: AnimatedBottomNavBar(
         currentIndex: _currentIndex,
