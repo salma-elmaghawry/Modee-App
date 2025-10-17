@@ -1,21 +1,21 @@
-# Moddee-App
+# 🛒 Moddee-App
 
-A Flutter e-commerce sample app (internal project "markatty"). This README gives setup instructions, the API endpoints used, a short folder structure overview, why Cubit is used for state management, and small demo screenshots.
+A Flutter e-commerce sample application (internal project **"markatty"**).  
+This README includes 🚀 setup instructions, 🔌 API usage, 📁 folder structure, 🎯 why Cubit, and 🖼️ demo preview images .
 
-## Setup
+---
 
-- Prerequisites: Flutter SDK (>= 3.0), Git, and an editor (VS Code or Android Studio).
-- Install dependencies:
+## ⚙️ Setup Instructions
 
-```pwsh
+> ✅ Requirements: **Flutter SDK (>=3.0), Git, Emulator or Physical Device**
+
+```bash
 flutter pub get
+flutter run
+
 ```
 
 - Run the app (connect a device or emulator):
-
-```pwsh
-flutter run
-```
 
 If you need to clear generated files and rebuild:
 
@@ -25,7 +25,7 @@ flutter pub get
 flutter run
 ```
 
-## API Endpoints Used
+## 🌐 API Endpoints Used
 
 This project uses a fake store API for demo data. See `lib/Core/Networking/api_constants.dart`.
 
@@ -35,8 +35,7 @@ This project uses a fake store API for demo data. See `lib/Core/Networking/api_c
 
 The networking layer lives in `lib/Core/Networking/api_service.dart` (wraps Dio, adds timeouts and maps errors into `ApiException`). Repositories call the ApiService and translate responses into models.
 
-## Folder structure (short explanation)
-
+## 📁 Folder Structure Overview
 - `lib/`
 	- `main.dart` — app entrypoint
 	- `modee_app.dart` — root widget and routing
@@ -51,20 +50,20 @@ The networking layer lives in `lib/Core/Networking/api_service.dart` (wraps Dio,
 
 This feature-based layout keeps feature code together (UI, state, data) which simplifies scaling the project.
 
-## State management: Why Cubit
+## ⚡ State management: Why Cubit
 
-- Simplicity: Cubit (from the bloc package) provides a minimal and predictable way to manage state with less boilerplate than full Bloc setup.
-- Testability: Cubits are easy to unit test — they are plain classes that emit states.
-- Observable states: UI subscribes to state changes via `BlocBuilder`/`BlocListener` which keeps presentation separated from business logic.
+- ✅ Simplicity: Cubit (from the bloc package) provides a minimal and predictable way to manage state with less boilerplate than full Bloc setup.
+- ✅ Testability: Cubits are easy to unit test — they are plain classes that emit states.
+- ✅ Observable states: UI subscribes to state changes via `BlocBuilder`/`BlocListener` which keeps presentation separated from business logic.
 
 In this project, each feature (e.g., products, categories, cart) exposes a Cubit that handles requests and emits `Loading`, `Loaded`, and `Error` states. Repositories abstract the networking and return models.
 
-## Error handling
+## 🚨 Error handling
 
 - Networking uses `Dio` wrapped by `ApiService`. Timeouts and network errors are mapped to `ApiException` with helpful messages (e.g., "No Internet connection" or "Request timed out").
 - UI reads error states and shows readable messages (and a retry action where appropriate).
 
-## Demo images
+🛍️ UI Preview — Demo Screens
 
 Below are screenshots from the app. They are referenced from the `assets/images/` folder. If they are not present, add them there.
 
