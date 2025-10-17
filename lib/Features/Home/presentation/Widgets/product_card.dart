@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:markatty/Core/Helpers/spacing.dart';
 import 'package:markatty/Core/Theme/app_colors.dart';
 import 'package:markatty/Core/Theme/app_images.dart';
 import 'package:markatty/Core/Theme/app_text_styles.dart';
+import 'package:markatty/Features/Cart/presentation/Manager/cart_cubit.dart';
 import 'package:markatty/Features/Home/presentation/Widgets/product_model.dart';
 
 class ProductCard extends StatelessWidget {
@@ -17,7 +20,7 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(right: 12, bottom: 12),
+      /// margin: const EdgeInsets.only(right: 12, bottom: 12),
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.circular(16),
@@ -83,23 +86,51 @@ class ProductCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 8),
                 Row(
                   children: [
-                    Text(
-                      "\$${product.price.toStringAsFixed(2)}",
-                      style: AppTextStyles.poppins14Bold(
-                        fontSize: 14,
+                    Column(
+                      children: [
+                        Text(
+                          "\$${product.price.toStringAsFixed(2)}",
+                          style: AppTextStyles.poppins14Bold(
+                            fontSize: 12,
+                            color: AppColors.primary,
+                          ),
+                        ),
+                        Text(
+                          "\$${(product.price + 20).toStringAsFixed(2)}",
+                          style: AppTextStyles.poppins14Regular(
+                            fontSize: 12,
+                            color: Colors.grey,
+                          ).copyWith(decoration: TextDecoration.lineThrough),
+                        ),
+                      ],
+                    ),
+                    const Spacer(),
+
+                    IconButton(
+                      onPressed: () {
+                        try {
+                          final cubit = context.read<CartCubit>();
+                          cubit.addToCart(product);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              backgroundColor: AppColors.primary,
+                              content: Text(
+                                'Added to cart',
+                                style: AppTextStyles.poppins14Regular(),
+                              ),
+                            ),
+                          );
+                        } catch (e) {
+                          // If CartCubit isn't provided higher up, ignore silently
+                        }
+                      },
+                      icon: const Icon(
+                        Icons.add_shopping_cart_outlined,
+                        size: 20,
                         color: AppColors.primary,
                       ),
-                    ),
-                    const SizedBox(width: 8),
-                    Text(
-                      "\$${product.price.toStringAsFixed(2)}",
-                      style: AppTextStyles.poppins14Regular(
-                        fontSize: 12,
-                        color: Colors.grey,
-                      ).copyWith(decoration: TextDecoration.lineThrough),
                     ),
                   ],
                 ),

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:markatty/Config/Routes/routes.dart';
 import 'package:markatty/Core/Theme/app_colors.dart';
 import 'package:markatty/Core/Theme/app_text_styles.dart';
 
 class AnimatedBottomNavBar extends StatelessWidget {
   final int currentIndex;
-  final Function(int) onTap;
+  final Function onTap;
 
   const AnimatedBottomNavBar({required this.currentIndex, required this.onTap});
 
@@ -34,23 +35,24 @@ class AnimatedBottomNavBar extends StatelessWidget {
               isActive: currentIndex == 0,
               onTap: () => onTap(0),
             ),
-            BottomNavItem(
-              icon: Icons.search,
-              label: 'Search',
-              isActive: currentIndex == 1,
-              onTap: () => onTap(1),
-            ),
+
             BottomNavItem(
               icon: Icons.favorite_border,
-              label: 'Wishlist',
-              isActive: currentIndex == 1,
-              onTap: () => onTap(1),
+              label: 'Favourites',
+              isActive: currentIndex == 2,
+              onTap: () => Navigator.pushNamed(context, Routes.fav),
+            ),
+            BottomNavItem(
+              icon: Icons.shopping_cart_outlined,
+              label: 'Cart',
+              isActive: currentIndex == 3,
+              onTap: () => Navigator.pushNamed(context, Routes.cart),
             ),
             BottomNavItem(
               icon: Icons.person_outline,
               label: 'Profile',
-              isActive: currentIndex == 2,
-              onTap: () => onTap(2),
+              isActive: currentIndex == 4,
+              onTap: () => onTap(4),
             ),
           ],
         ),

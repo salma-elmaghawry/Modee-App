@@ -8,15 +8,22 @@ class ProductRepository {
   ProductRepository(this.apiService);
 
   Future<List<ProductModel>> fetchProducts() async {
-    final response = await apiService.get(ApiConstants.productsEndpoint);
+    try {
+      final response = await apiService.get(ApiConstants.productsEndpoint);
 
-    if (response.statusCode == 200) {
-      final List<dynamic> data = response.data;
-      return data
-          .map((json) => ProductModel.fromJson(json as Map<String, dynamic>))
-          .toList();
-    } else {
-      throw Exception('Failed to load products');
+      if (response.statusCode == 200) {
+        final List<dynamic> data = response.data;
+        return data
+            .map((json) => ProductModel.fromJson(json as Map<String, dynamic>))
+            .toList();
+      } else {
+        throw Exception(
+          'Failed to load products (status: ${response.statusCode})',
+        );
+      }
+    } catch (e) {
+      // Re-throw to allow callers (cubits) to translate into UI messages
+      rethrow;
     }
   }
 }

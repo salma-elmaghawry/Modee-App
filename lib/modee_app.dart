@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:markatty/Config/Routes/app_router.dart';
 import 'package:markatty/Config/Routes/routes.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:markatty/Features/Cart/presentation/Manager/cart_cubit.dart';
 import 'package:markatty/Core/Theme/app_colors.dart';
 
 class ModeeApp extends StatelessWidget {
@@ -11,19 +13,22 @@ class ModeeApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(430, 930),
       minTextAdapt: true,
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(scaffoldBackgroundColor: AppColors.background),
-        onGenerateRoute: AppRouter().generateRoute,
-        initialRoute: Routes.home,
-        onUnknownRoute: (settings) {
-          return MaterialPageRoute(
-            builder: (context) => Scaffold(
-              appBar: AppBar(title: const Text('Route Not Found')),
-              body: const Center(child: Text('Page not found')),
-            ),
-          );
-        },
+      child: BlocProvider(
+        create: (_) => CartCubit(),
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(scaffoldBackgroundColor: AppColors.background),
+          onGenerateRoute: AppRouter().generateRoute,
+          initialRoute: Routes.home,
+          onUnknownRoute: (settings) {
+            return MaterialPageRoute(
+              builder: (context) => Scaffold(
+                appBar: AppBar(title: const Text('Route Not Found')),
+                body: const Center(child: Text('Page not found')),
+              ),
+            );
+          },
+        ),
       ),
     );
   }
