@@ -1,4 +1,4 @@
-# 🛒 Moddee-App
+# 🛒 Modee-App
 
 A Flutter e-commerce sample application (internal project **"markatty"**).  
 This README includes 🚀 setup instructions, 🔌 API usage, 📁 folder structure, 🎯 why Cubit, and 🖼️ demo preview images .
