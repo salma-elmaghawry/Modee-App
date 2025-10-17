@@ -65,28 +65,20 @@ In this project, each feature (e.g., products, categories, cart) exposes a Cubit
 
 🛍️ UI Preview — Demo Screens
 
-Below are screenshots from the app. They are referenced from the `assets/images/` folder. If they are not present, add them there.
-
-Cart view 1:
-
-![cart1](assets/images/cart1.png)
-
-Cart view 2:
-
-![cart2](assets/images/cart2.png)
-
-Home demo:
-
-![home1](assets/images/home1.png)
-
-Home demo 2:
-
-![home2](assets/images/home2.png)
-
 Full demo:
 
-![demo](assets/images/demo.png)
+https://github.com/user-attachments/assets/91317f4b-1209-4698-b1c8-ad36f15d8e3b
+
+<table>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/498dd5e1-6028-4b3b-b4eb-2ce1589bf908" width="200"/></td>
+    <td><img src="https://github.com/user-attachments/assets/5d392cdb-40d9-43c5-8cf8-f0e9b368b9cd" width="200"/></td>
+    <td><img src="https://github.com/user-attachments/assets/2cb39976-0d0f-407d-a8ef-bcfd47df067d" width="200"/></td>
+    <td><img src="https://github.com/user-attachments/assets/f75aa537-195a-4978-9338-e41d1bb0add2" width="200"/></td>
+  </tr>
+</table>
+
+
 
 ---
 
-If you want, I can also add unit tests for the networking layer to validate ApiException mapping and add a small CONTRIBUTING or developer notes file. Let me know which you'd prefer next.
